@@ -46,16 +46,16 @@ class TikTokOSINT:
 		soup = BeautifulSoup(r.text, "html.parser")
 		content = soup.find_all("script", attrs={"type":"application/json", "crossorigin":"anonymous"})
 		content = json.loads(content[0].contents[0])
-		profile_data = {"UserID":content["props"]["pageProps"]["userData"]["userId"],
-			"username":content["props"]["pageProps"]["userData"]["uniqueId"],
-			"nickName":content["props"]["pageProps"]["userData"]["nickName"],
-			"bio":content["props"]["pageProps"]["userData"]["signature"],
-			"profileImage":content["props"]["pageProps"]["userData"]["coversMedium"][0],
-			"following":content["props"]["pageProps"]["userData"]["following"],
-			"fans":content["props"]["pageProps"]["userData"]["fans"],
-			"hearts":content["props"]["pageProps"]["userData"]["heart"],
-			"videos":content["props"]["pageProps"]["userData"]["video"],
-			"verified":content["props"]["pageProps"]["userData"]["verified"]}
+		profile_data = {"UserID":content["props"]["pageProps"]["userInfo"]["user"]["id"],
+			"username":content["props"]["pageProps"]["userInfo"]["user"]["uniqueId"],
+			"nickName":content["props"]["pageProps"]["userInfo"]["user"]["nickname"],
+			"bio":content["props"]["pageProps"]["userInfo"]["user"]["signature"],
+			"profileImage":content["props"]["pageProps"]["userInfo"]["user"]["avatarLarger"],
+			"following":content["props"]["pageProps"]["userInfo"]["stats"]["followingCount"],
+			"followers":content["props"]["pageProps"]["userInfo"]["stats"]["followerCount"],
+			"likes":content["props"]["pageProps"]["userInfo"]["stats"]["heart"],
+			"videos":content["props"]["pageProps"]["userInfo"]["stats"]["videoCount"],
+			"verified":content["props"]["pageProps"]["userInfo"]["user"]["verified"]}
 
 		return profile_data
 
