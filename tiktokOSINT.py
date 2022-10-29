@@ -11,7 +11,6 @@ import json
 import os
 import random
 import requests
-import sys
 
 from banner import banner
 from bs4 import BeautifulSoup
