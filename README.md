@@ -1,6 +1,28 @@
 # TikTokOSINT Tool
 
 TikTok Social Media Open Source Intellegence Tool
+
+## Requirements
+- Python 3
+- pip
+- git (optional, just for git installation method)
+- wget (optional, just for zip method)
+- unzip (optional, just for zip method)
+
+## Installation
+### Git method
+```bash
+git clone https://github.com/Omicron166/TikTok-OSINT
+cd TikTok-OSINT
+pip3 install -r requirements.txt
+```
+### Zip method
+```bash
+wget https://github.com/Omicron166/TikTok-OSINT/archive/refs/heads/master.zip
+unzip master.zip
+cd TikTok-OSINT-master
+pip3 install -r requirements.txt
+```
  
 
 ## Usage
