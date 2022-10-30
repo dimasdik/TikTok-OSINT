@@ -54,11 +54,17 @@ class Scrapper:
 		:params: none
 		:return:none
 		"""
-		r = requests.get(f'http://tiktok.com/{self.username}', headers={'User-Agent': random.choice(user_agents)})
+		r = requests.get(
+			f'http://tiktok.com/{self.username}',
+			headers={'User-Agent': random.choice(user_agents)}
+		)
+
 		soup = BeautifulSoup(r.text, "html.parser")
-		content = soup.find_all("script", attrs={"type": "application/json", "crossorigin": "anonymous"})
-		content = json.loads(content[0].contents[0])
-		profile_data = {"UserID":content["props"]["pageProps"]["userInfo"]["user"]["id"],
+		data = soup.find_all("script", attrs={"type": "application/json", "crossorigin": "anonymous"})
+		content = json.loads(data[0].contents[0])
+
+		return {
+			"UserID": content["props"]["pageProps"]["userInfo"]["user"]["id"],
 			"username": content["props"]["pageProps"]["userInfo"]["user"]["uniqueId"],
 			"nickName": content["props"]["pageProps"]["userInfo"]["user"]["nickname"],
 			"bio": content["props"]["pageProps"]["userInfo"]["user"]["signature"],
@@ -67,9 +73,8 @@ class Scrapper:
 			"followers": content["props"]["pageProps"]["userInfo"]["stats"]["followerCount"],
 			"likes": content["props"]["pageProps"]["userInfo"]["stats"]["heart"],
 			"videos": content["props"]["pageProps"]["userInfo"]["stats"]["videoCount"],
-			"verified": content["props"]["pageProps"]["userInfo"]["user"]["verified"]}
-
-		return profile_data
+			"verified": content["props"]["pageProps"]["userInfo"]["user"]["verified"]
+		}
 
 	def download_profile_picture(self):
 		"""

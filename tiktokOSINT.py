@@ -20,12 +20,10 @@ def arg_parse():
 def main():
 	print(banner)
 	args = arg_parse()
+	
+	tiktok = Scrapper(args.username[0])
 	if args.downloadProfilePic == True:
-		tiktok = Scrapper(args.username[0])
 		tiktok.download_profile_picture()
-	else:
-		tiktok = Scrapper(args.username[0])
-
 
 if __name__ == "__main__":
 	main()
